@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GODZILLA ADDON</title>
 
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050805;
+    color: white;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+}
+
+h1 {
+    font-size: clamp(40px, 9vw, 85px);
+    font-weight: 900;
+    letter-spacing: 5px;
+    color: #a5ff00;
+    text-shadow:
+        0 0 10px #a5ff00,
+        0 0 25px #72ff00,
+        0 0 50px #39ff00,
+        0 0 90px #39ff00;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow:
+            0 0 10px #a5ff00,
+            0 0 25px #72ff00;
+    }
+    to {
+        text-shadow:
+            0 0 20px #a5ff00,
+            0 0 45px #72ff00,
+            0 0 80px #39ff00;
+    }
+}
+
+p {
+    color: #999;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    letter-spacing: 3px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: transparent;
+    border: 2px solid #a5ff00;
+    border-radius: 6px;
+    color: #a5ff00;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: .3s;
+    box-shadow: 0 0 12px #a5ff0033;
+}
+
+.button:hover {
+    background: #a5ff00;
+    color: black;
+    box-shadow: 0 0 30px #a5ff00;
+    transform: scale(1.08);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>GODZILLA ADDON</h1>
+
+    <p>MINECRAFT PVP • METEOR CLIENT</p>
+
+    <a
+        href="https://discord.gg/mdWQaq6gP8"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button">
+        COMMUNITY
+    </a>
+
+</div>
+
+</body>
+</html>
