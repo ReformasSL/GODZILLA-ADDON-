@@ -2,94 +2,294 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Godzilla Addon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Godzilla Addon</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-            background:
-                linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.8)),
-                url("https://klipy.com/gifs/godzilla-ultima-godzilla-singular-point")
-                center / cover no-repeat;
-        }
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #050000;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 15px;
+}
 
-        .container {
-            text-align: center;
-            color: white;
-            padding: 40px;
-        }
+/* FONDO GODZILLA */
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url("https://static2.klipy.com/ii/d7aec6f6f171607374b2065c836f92f4/d4/c4/kj58ZoaH.gif");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: zoom 20s infinite alternate;
+}
 
-        h1 {
-            font-size: clamp(45px, 9vw, 90px);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: #ff2929;
-            text-shadow:
-                0 0 10px #ff0000,
-                0 0 30px #ff0000,
-                4px 4px 5px black;
-            margin-bottom: 35px;
-        }
+@keyframes zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.12); }
+}
 
-        .community {
-            display: inline-block;
-            padding: 17px 45px;
-            background: #e32626;
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-            border-radius: 10px;
-            border: 2px solid #ff5555;
-            box-shadow: 0 0 20px #ff0000;
-            transition: 0.3s;
-        }
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        rgba(0,0,0,.65),
+        rgba(0,0,0,.85)
+    );
+}
 
-        .community:hover {
-            background: #ff4444;
-            transform: scale(1.1);
-            box-shadow: 0 0 35px red;
-        }
+/* LUCES */
+.light {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: red;
+    filter: blur(150px);
+    opacity: .15;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: lightPulse 4s infinite alternate;
+}
 
-        .subtitle {
-            color: #ddd;
-            font-size: 18px;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-    </style>
+.light.one {
+    top: -100px;
+    left: -100px;
+}
+
+.light.two {
+    bottom: -100px;
+    right: -100px;
+}
+
+@keyframes lightPulse {
+    from { opacity: .08; }
+    to { opacity: .3; }
+}
+
+/* CONTENIDO */
+.container {
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+    animation: entrance 1.5s ease;
+}
+
+@keyframes entrance {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* LOGO */
+.logo {
+    font-size: clamp(42px, 9vw, 90px);
+    font-weight: 1000;
+    letter-spacing: 5px;
+    color: white;
+    animation: neon 2.5s infinite;
+}
+
+@keyframes neon {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+        text-shadow:
+            0 0 5px white,
+            0 0 10px red,
+            0 0 20px red,
+            0 0 40px red,
+            0 0 80px red,
+            0 0 120px red;
+    }
+
+    20%, 24%, 55% {
+        opacity: .5;
+        text-shadow: none;
+    }
+}
+
+.subtitle {
+    color: white;
+    margin: 18px 0 35px;
+    letter-spacing: 6px;
+    text-shadow: 0 0 15px red;
+}
+
+/* MODULOS */
+.modules-title {
+    color: white;
+    font-size: 25px;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px red;
+}
+
+.modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 18px;
+    margin-bottom: 40px;
+}
+
+.module {
+    padding: 25px 12px;
+    background: rgba(30, 0, 0, .75);
+    border: 1px solid #ff2222;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 0 10px rgba(255,0,0,.5),
+        inset 0 0 10px rgba(255,0,0,.15);
+
+    transition: .3s;
+    animation: moduleGlow 3s infinite alternate;
+}
+
+.module:hover {
+    transform: translateY(-8px) scale(1.04);
+    background: rgba(130,0,0,.8);
+    box-shadow: 0 0 30px red;
+}
+
+@keyframes moduleGlow {
+    from {
+        border-color: #8b0000;
+        box-shadow: 0 0 5px red;
+    }
+    to {
+        border-color: #ff4444;
+        box-shadow: 0 0 18px red;
+    }
+}
+
+.module span {
+    display: block;
+    color: #ff5555;
+    font-size: 12px;
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+
+/* BOTON */
+.community {
+    display: inline-block;
+    padding: 18px 50px;
+    border: 2px solid #ff2222;
+    border-radius: 10px;
+    color: white;
+    background: rgba(120,0,0,.55);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    box-shadow: 0 0 15px red;
+    animation: buttonGlow 2s infinite alternate;
+    transition: .3s;
+}
+
+@keyframes buttonGlow {
+    from { box-shadow: 0 0 8px red; }
+    to { box-shadow: 0 0 35px red, 0 0 55px red; }
+}
+
+.community:hover {
+    transform: scale(1.1);
+    background: red;
+}
+
+/* MOVILES */
+@media (max-width: 600px) {
+    .modules {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .module {
+        padding: 20px 8px;
+        font-size: 15px;
+    }
+
+    .modules-title {
+        font-size: 20px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Godzilla Addon</h1>
+<div class="background"></div>
+<div class="overlay"></div>
 
-        <p class="subtitle">
-            THE KING OF MONSTERS
-        </p>
+<div class="light one"></div>
+<div class="light two"></div>
 
-        <a class="community"
-           href="https://discord.gg/eqWnW8MHpC"
-           target="_blank"
-           rel="noopener noreferrer">
-            Comunidad
-        </a>
-    </div>
+<main class="container">
+
+    <h1 class="logo">GODZILLA ADDON</h1>
+
+    <p class="subtitle">THE KING OF MONSTERS</p>
+
+    <h2 class="modules-title">✦ INCLUDED MODULES ✦</h2>
+
+    <section class="modules">
+
+        <div class="module">
+            AutoMine
+            <span>MODULE</span>
+        </div>
+
+        <div class="module">
+            AutoCrystal
+            <span>MODULE</span>
+        </div>
+
+        <div class="module">
+            AnchorTP
+            <span>MODULE</span>
+        </div>
+
+        <div class="module">
+            SpearTP
+            <span>MODULE</span>
+        </div>
+
+        <div class="module">
+            PahePearl
+            <span>MODULE</span>
+        </div>
+
+    </section>
+
+    <a
+        class="community"
+        href="https://discord.gg/eqWnW8MHpC"
+        target="_blank"
+        rel="noopener noreferrer">
+        COMUNIDAD
+    </a>
+
+</main>
 
 </body>
 </html>
